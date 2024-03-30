@@ -1,0 +1,73 @@
+﻿@model List<CarRentalApp.Models.Car>
+
+@{
+    ViewData["Title"] = "CARS";
+}
+
+<div style="margin-top: 4em">
+    <div class="row">
+        <div class="col-md-6">
+            <!-- User List -->
+            <h3>Cars</h3>
+            <br />
+            <table style="width: 100%; border-collapse: separate; border-spacing: 1em; border-color: white; border:solid">
+                <thead>
+                    <tr style="border-bottom: solid; border-color:white">
+                        <th>Brand</th>
+                        <th>Color</th>
+                        <th>KM</th>
+                        <th>Availability</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var car in Model)
+                    {
+                        <tr style ="border-bottom: solid; border-color:white">
+                            <td>@car.Brand</td>
+                            <td>@car.Color</td>
+                            <td>@car.Km</td>
+                            <td>@(car.isAvailable ? "✓" : "X")</td>
+                            <td>
+                                <form id="delete" method="post" action="@Url.Action("EditCurrentCar", "Car", new { id = car.Id })">
+                                    <button type="submit" class="btn btn-primary">U</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form id="delete" method="post" action="@Url.Action("Delete", "Car", new { id = car.Id })">
+                                    <button type="submit" class="btn btn-danger">D</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <h1>Add new Car</h1>
+            <br />
+            <form action="@Url.Action("Create", "Car")" method="post">
+                <div class="form-group">
+                    <label for="brand">Brand:</label>
+                    <input type="text" class="form-control" id="brand" name="Brand" placeholder="Enter car brand..." required>
+                </div>
+                <div class="form-group">
+                    <label for="color">Color:</label>
+                    <select class="form-control" id="color" name="Color"  required>
+                        <option value="" disabled selected hidden>Choose a color</option>
+                        <option value="Black">Black</option>
+                        <option value="White">White</option>
+                        <option value="Green">Green</option>
+                        <option value="Red">Red</option>
+                        <option value="Blue">Blue</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="km">Current KM:</label>
+                    <input type="text" class="form-control" id="km" name="KM" placeholder="Enter current car km count..." required>
+                </div>
+                <br />
+                <button type="submit" class="btn btn-success">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>

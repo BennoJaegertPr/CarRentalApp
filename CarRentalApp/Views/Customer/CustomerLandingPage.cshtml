@@ -1,0 +1,71 @@
+﻿@model List<CarRentalApp.Models.Customer>
+
+@{
+    ViewData["Title"] = "CUSTOMERS";
+}
+
+<div style="margin-top: 4em">
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Customers</h3>
+            <br />
+            <table style ="width: 100%; border-collapse: separate; border-spacing: 1em; border-color: white; border:solid">
+                <thead>
+                    <tr style="border-bottom: solid; border-color:white">
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>BirthDate</th>
+                        <th>Phonenumber</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var customer in Model)
+                    {
+                        <tr style ="border-bottom: solid; border-color:white">
+                            <td>@customer.Firstname</td>
+                            <td>@customer.Lastname</td>
+                            <td>@customer.BirthDate</td>
+                            <td>@customer.Phonenumber</td>
+                            <td>
+                                <form id="edit" method="post" action="@Url.Action("EditCurrentCustomer", "Customer", new { id = customer.Id })">
+                                    <button type="submit" class="btn btn-primary">U</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form id="delete" method="post" action="@Url.Action("Delete", "Customer", new { id = customer.Id })">
+                                    <button type="submit" class="btn btn-danger">D</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <h3>Add Customer</h3>
+            <br />
+            <form action="@Url.Action("Create", "Customer")" method="post">
+                <div class="form-group">
+                    <label for="firstname">Firstname:</label>
+                    <input type="text" class="form-control" id="Firstname" name="Firstname" placeholder="Firstname..." required>
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Lastname:</label>
+                    <input type="text" class="form-control" id="Lastname" name="Lastname" placeholder="Lastname..." required>
+                </div>
+                <div class="form-group">
+                    <label for="birthdate">Birthdate:</label>
+                    <input type="date" class="form-control" id="BirthDate" name="BirthDate" placeholder="Birthdate..." required>
+                </div>
+                <div class="form-group">
+                    <label for="phonenumber">Phonenumber:</label>
+                    <input type="text" class="form-control" id="Phonenumber" name="Phonenumber" value="+43 " required>
+                </div>
+                <br />
+                <button type="submit" class="btn btn-primary">Add Customer</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
