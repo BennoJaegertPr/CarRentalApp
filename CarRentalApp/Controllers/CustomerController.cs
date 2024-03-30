@@ -43,7 +43,7 @@ namespace CarRentalApp.Controllers
             {
                 _db.Customer.Update(customer);
                 _db.SaveChanges(true);
-                _logger.LogInformation("Updated. Car with id: " + customer.Id);
+                _logger.LogInformation("Updated. Customer with id: " + customer.Id);
                 return RedirectToAction(nameof(CustomerLandingPage));
             }
             return RedirectToAction(nameof(BadRequestObjectResult));
