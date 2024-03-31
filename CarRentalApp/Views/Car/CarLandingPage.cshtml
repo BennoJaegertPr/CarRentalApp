@@ -16,6 +16,7 @@
                         <th>Brand</th>
                         <th>Color</th>
                         <th>KM</th>
+                        <th>Price per Day</th>
                         <th>Availability</th>
                     </tr>
                 </thead>
@@ -26,6 +27,7 @@
                             <td>@car.Brand</td>
                             <td>@car.Color</td>
                             <td>@car.Km</td>
+                            <td>@car.PricePerDay €</td>
                             <td>@(car.isAvailable ? "✓" : "X")</td>
                             <td>
                                 <form id="delete" method="post" action="@Url.Action("EditCurrentCar", "Car", new { id = car.Id })">
@@ -64,6 +66,10 @@
                 <div class="form-group">
                     <label for="km">Current KM:</label>
                     <input type="text" class="form-control" id="km" name="KM" placeholder="Enter current car km count..." required>
+                </div>
+                <div class="form-group">
+                    <label for="pricePerDay">Rental price per day:</label>
+                    <input type="number" class="form-control" id="pricePerDay" name="PricePerDay" placeholder="Daily price of the car..." required>
                 </div>
                 <br />
                 <button type="submit" class="btn btn-success">Submit</button>
