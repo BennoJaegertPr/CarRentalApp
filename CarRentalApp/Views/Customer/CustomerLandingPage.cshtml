@@ -24,7 +24,7 @@
                         <tr style ="border-bottom: solid; border-color:white">
                             <td>@customer.Firstname</td>
                             <td>@customer.Lastname</td>
-                            <td>@customer.BirthDate</td>
+                            <td>@customer.BirthDate.ToString().Substring(0, 10)</td>
                             <td>@customer.Phonenumber</td>
                             <td>
                                 <form id="edit" method="post" action="@Url.Action("EditCurrentCustomer", "Customer", new { id = customer.Id })">

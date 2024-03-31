@@ -29,6 +29,10 @@
                     <input type="text" class="form-control" id="km" name="KM" value="@Model.Km" required>
                 </div>
                 <div class="form-group">
+                    <label for="pricePerDay">Rental price per day:</label>
+                    <input type="number" class="form-control" id="pricePerDay" name="PricePerDay" value="@Model.PricePerDay" required>
+                </div>
+                <div class="form-group">
                     <label for="isAvailable">Availability:</label>
                     <select class="form-control" id="isAvailable" name="isAvailable" value="@Model.isAvailable" required>
                         <option value="@Model.isAvailable" disabled selected hidden>@if (@Model.isAvailable)

@@ -1,0 +1,50 @@
+﻿@model CarRentalApp.Models.Rental;
+
+@{
+    ViewData["Title"] = "Return Car";
+}
+
+<div style="margin-top: 4em">
+    <div class="row">
+        <div class="col-md-6">
+	        <table class="table">
+		        <thead>
+		        <tr>
+			        <th>Customer ID</th>
+			        <th>Customer Firstname</th>
+			        <th>Customer Lastname</th>
+			        <th>Car ID</th>
+			        <th>Car Brand</th>
+			        <th>Car Color</th>
+			        <th>Car Km</th>
+			        <th>Rented when</th>
+			        <th>Rented until</th>
+		        </tr>
+		        </thead>
+		        <tbody>
+			        <tr>
+				        <td>@Model.Customer.Id</td>
+                        <td>@Model.Customer.Firstname</td>
+                        <td>@Model.Customer.Lastname</td>
+				        <td>@Model.Car.Id</td>
+                        <td>@Model.Car.Brand</td>
+                        <td>@Model.Car.Color</td>
+                        <td>@Model.Car.Km</td>
+				        <td>@Model.RentedWhen</td>
+				        <td>@Model.RentedUntil</td>
+			        </tr>
+		        </tbody>
+	        </table>
+            <br />
+            <form action="@Url.Action("Edit", "Rental", new { id = @Model.Id })" method="post">
+                <div class="form-group">
+                    <label for="newKm">New Km count:</label>
+                    <input type="number" class="form-control" id="newKm" name="newKm" required>
+                </div>
+                <br />
+                <button type="submit" class="btn btn-success">Return Car</button>
+            </form>
+        </div>
+    </div>
+</div>
+

@@ -17,7 +17,7 @@ namespace CarRentalApp.Controllers
 
         public ActionResult CustomerLandingPage()
         {
-            var customers = _db.Customer.ToList();
+            var customers = _db.Customers.ToList();
             return View(customers);
         }
 
@@ -28,7 +28,7 @@ namespace CarRentalApp.Controllers
 
             if (ModelState.IsValid)
             {
-                _db.Customer.Add(customer);
+                _db.Customers.Add(customer);
                 _db.SaveChanges();
                 _logger.LogInformation("Created. New Customer created with id: " + customer.Id);
                 return RedirectToAction(nameof(CustomerLandingPage));
@@ -41,7 +41,7 @@ namespace CarRentalApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                _db.Customer.Update(customer);
+                _db.Customers.Update(customer);
                 _db.SaveChanges(true);
                 _logger.LogInformation("Updated. Customer with id: " + customer.Id);
                 return RedirectToAction(nameof(CustomerLandingPage));
@@ -52,14 +52,14 @@ namespace CarRentalApp.Controllers
         [HttpPost]
         public ActionResult EditCurrentCustomer(int id)
         {
-            var customerToBeUpdated = _db.Customer.FirstOrDefault(x => x.Id == id);
+            var customerToBeUpdated = _db.Customers.FirstOrDefault(x => x.Id == id);
             return View("EditCustomer", customerToBeUpdated);
         }
 
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            var customerToDelete = _db.Customer.Find(id);
+            var customerToDelete = _db.Customers.Find(id);
             if (customerToDelete == null)
             {
                 _logger.LogError("No entry found for Customer, Id: " + id);
@@ -67,7 +67,7 @@ namespace CarRentalApp.Controllers
             }
             else
             {
-                _db.Customer.Remove(customerToDelete);
+                _db.Customers.Remove(customerToDelete);
                 _db.SaveChanges();
                 _logger.LogInformation("Deleted. Id of deleted Customer entity: " + id);
                 return RedirectToAction(nameof(CustomerLandingPage));

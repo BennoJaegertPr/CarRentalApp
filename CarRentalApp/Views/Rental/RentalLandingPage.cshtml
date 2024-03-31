@@ -1,13 +1,81 @@
-﻿@model Rental;
+﻿@model List<CarRentalApp.Models.Rental>
 
 @{
     ViewData["Title"] = "CAR RENTAL SERVICE";
 }
 
+<div class="container" style="margin-bottom=5em">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1 class="text-center">New Rental</h1>
+            <form action="@Url.Action("Create", "Rental")" method="post">
+                <div class="form-group">
+                    <label for="customerId">CustomerId: </label>
+                    <input type="number" class="form-control" id="CustomerId" name="CustomerId" required>
+                </div>
+                <div class="form-group">
+                    <label for="carId">CarId:</label>
+                    <input type="number" class="form-control" id="CarId" name="CarId" required>
+                </div>
+                <div class="form-group">
+                    <label for="RentedWhen">Date of Rental:</label>
+                    <input type="date" class="form-control" id="RentedWhen" name="RentedWhen" value="@DateTime.Now.ToString("yyyy-MM-dd")" required>
+                </div>
+                <div class="form-group">
+                    <label for="RentedPeriodInDays">Rental Period in Days:</label>
+                    <input type="number" class="form-control" id="RentedPeriodInDays" name="RentedPeriodInDays" required>
+                </div>
+                <br />
+                <button type="submit" class="btn btn-primary">Add Customer</button>
+            </form>
+        </div>
+    </div>
+</div>
+
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-6">
-            <h1 class="text-center">Rentals overview</h1>
+        <div class="col-md-8">
+            <h1 class="text-center">Rentals Overview</h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Customer ID</th>
+                        <th>Customer Firstname</th>
+                        <th>Customer Lastname</th>
+                        <th>Car ID</th>
+                        <th>Car Brand</th>
+                        <th>Car Color</th>
+                        <th>Car Km</th>
+                        <th>Rented when</th>
+                        <th>Rented until</th>
+                        <th>Cost</th>
+                        <th>Returned status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var rental in Model)
+                    {
+                        <tr>
+                            <td>@(rental.Customer.Id)</td>
+                            <td>@(rental.Customer.Firstname)</td>
+                            <td>@(rental.Customer.Lastname)</td>
+                            <td>@(rental.Car.Id)</td>
+                            <td>@(rental.Car.Brand)</td>
+                            <td>@(rental.Car.Color)</td>
+                            <td>@(rental.Car.Km)</td>
+                            <td>@(rental.RentedWhen)</td>
+                            <td>@(rental.RentedUntil)</td>
+                            <td>@(rental.Cost)</td>
+                            <td>@(rental.RentComplete)</td>
+                            <td>
+	                            <form id="returnCar" method="post" action="@Url.Action("returnCar", "Rental", new { id = rental.Id })">
+		                            <button type="submit" class="btn-outline-success">RETURN CAR</button>
+	                            </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
