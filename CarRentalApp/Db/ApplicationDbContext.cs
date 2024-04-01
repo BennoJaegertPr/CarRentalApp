@@ -10,6 +10,7 @@
         {
         }
 
+        //Initialize DB Context with corresponding DB sets
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Car> Cars { get; set; }
         public DbSet<Rental> Rentals { get; set; }

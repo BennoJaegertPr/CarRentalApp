@@ -2,7 +2,6 @@ using CarRentalApp.Db;
 using CarRentalApp.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
-using Microsoft.Extensions.Logging.Configuration;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,10 +23,10 @@ var logger = new LoggerConfiguration()
 builder.Host.UseSerilog(logger);
 
 // Retrieve connection string
-string? connectionString = config.GetConnectionString("DefaultConnection");
+var connectionString = config.GetConnectionString("DefaultConnection");
 
 // Retrieve value indicating whether to use in-memory database
-bool useInMemoryDatabase = config.GetValue<bool>("UseInMemoryDatabase");
+var useInMemoryDatabase = config.GetValue<bool>("UseInMemoryDatabase");
 
 if (useInMemoryDatabase){
     builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -71,7 +70,7 @@ using (var scope = app.Services.CreateScope())
         var bmw = dbContext.Cars.Single(c => c.Brand == "BMW" && c.Color == "Red");
         var audi = dbContext.Cars.Single(c => c.Brand == "Audi" && c.Color == "Black");
 
-        // Seed the database with initial cars
+        // Seed the database with initial Rentals
         dbContext.Rentals.AddRange(
             new Rental { Customer = johnDoe, Car= bmw, RentedPeriodInDays = 14 },
             new Rental { Customer = janeDoe, Car = audi, RentedPeriodInDays = 4 }
